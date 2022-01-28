@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './users.schema';
@@ -16,7 +16,7 @@ export class UsersService {
     const isCatExists = await this.userModel.exists({ email });
 
     if (isCatExists) {
-      throw new UnauthorizedException('User is aleady exists');
+      throw new ConflictException('User is aleady exists');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
