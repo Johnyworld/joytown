@@ -1,30 +1,32 @@
-import { Injectable } from '@nestjs/common';
-
-export type User = {
-  id: number;
-  name: string;
-  username: string;
-  password: string;
-};
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from './users.schema';
+import { UserRequestDto } from './dto/user.request.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  private readonly users: User[] = [
-    {
-      id: 1,
-      name: 'Marius',
-      username: 'marius',
-      password: 'sosecure',
-    },
-    {
-      id: 2,
-      name: 'Mambo',
-      username: 'mambo',
-      password: 'dumbo',
-    },
-  ];
+  constructor(
+    @InjectModel(User.name) private readonly userModel: Model<User>,
+  ) {}
 
-  async findOne(username: string): Promise<User | undefined> {
-    return this.users.find((user) => user.username === username);
+  async register(body: UserRequestDto) {
+    const { email, name, password } = body;
+    const isCatExists = await this.userModel.exists({ email });
+
+    if (isCatExists) {
+      throw new UnauthorizedException('User is aleady exists');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await this.userModel.create({
+      email,
+      name,
+      password: hashedPassword,
+    });
+
+    return user.readOnlyData;
   }
 }
