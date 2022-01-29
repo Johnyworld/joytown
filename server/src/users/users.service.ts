@@ -1,30 +1,28 @@
-import { Injectable } from '@nestjs/common';
-
-export type User = {
-	id: number;
-	name: string;
-	username: string;
-	password: string;
-}
+import { ConflictException, Injectable } from '@nestjs/common';
+import { UserRequestDto } from './dto/user.request.dto';
+import * as bcrypt from 'bcrypt';
+import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
-	private readonly users: User[] = [
-		{
-			id: 1,
-			name: 'Marius',
-			username: 'marius',
-			password: 'sosecure',
-		},
-		{
-			id: 2,
-			name: 'Mambo',
-			username: 'mambo',
-			password: 'dumbo',
-		},
-	];
+  constructor(private readonly usersRepository: UsersRepository) {}
 
-	async findOne(username: string): Promise<User | undefined> {
-		return this.users.find(user => user.username === username);
-	}
+  async register(body: UserRequestDto) {
+    const { email, name, password } = body;
+    const isCatExists = await this.usersRepository.existsByEmail(email);
+
+    if (isCatExists) {
+      throw new ConflictException('user is aleady exists');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await this.usersRepository.create({
+      email,
+      name,
+      password: hashedPassword,
+    });
+
+    return user.readOnlyData;
+  }
 }
