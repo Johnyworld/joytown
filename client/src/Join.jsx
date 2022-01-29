@@ -1,15 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export default function Join() {
-  const navigate = useNavigate();
-
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    console.log(details);
+    axios.post("/api/user", details).then((res) => console.log(res));
   };
 
   return (
