@@ -1,12 +1,13 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState } from 'react';
+import api from './utils/api';
 
 export default function Join() {
-  const [details, setDetails] = useState({ name: "", email: "", password: "" });
+  const [details, setDetails] = useState({ name: '', email: '', password: '' });
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    axios.post("/api/user", details).then((res) => console.log(res));
+    api.회원가입(details);
+    // axios.post("/api/user", details).then((res) => console.log(res));
   };
 
   return (
