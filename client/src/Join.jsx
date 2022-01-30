@@ -1,13 +1,19 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from './utils/api';
 
 export default function Join() {
+  const navigate = useNavigate();
   const [details, setDetails] = useState({ name: '', email: '', password: '' });
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    api.회원가입(details);
-    // axios.post("/api/user", details).then((res) => console.log(res));
+    const { ok, message, data } = await api.회원가입(details);
+    if (!ok) alert(message);
+    else {
+      alert('잘 됏어요~!', data);
+      navigate(`/login?email=${data.email}`);
+    }
   };
 
   return (
