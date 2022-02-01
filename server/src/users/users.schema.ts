@@ -53,5 +53,10 @@ UserSchema.virtual('readOnlyData').get(function (this: User) {
     id: this.id,
     email: this.email,
     name: this.name,
+    birth: this.birth,
+    address: this.address,
+    contact: this.contact,
+    photo: this.photo,
+    farm: this.farm,
   };
 });
