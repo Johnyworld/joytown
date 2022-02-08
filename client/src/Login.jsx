@@ -1,12 +1,20 @@
 import { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import api from "./utils/api";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [details, setDetails] = useState({ email: "", password: "" });
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    axios.post("/api/user", details).then((res) => console.log(res));
+    // axios.post("/api/user", details).then((res) => console.log(res));
+    const { ok, message, data } = await api.로그인(details);
+    if (!ok) alert(message);
+    else {
+      alert("잘 됐어요~!", data);
+      navigate(`/login?email=${data.email}`);
+    }
   };
 
   return (

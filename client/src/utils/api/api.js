@@ -1,4 +1,4 @@
-import request from './request';
+import request from "./request";
 
 /**
  * 모든 API 요청을 여기서 관리합니다.
@@ -7,9 +7,9 @@ import request from './request';
  */
 const api = {
   로그인: async ({ email, password }) =>
-    await request('POST', '/api/auth', { email, password }),
+    await request("POST", "/api/auth/", { email, password }),
   회원가입: async ({ email, name, password }) =>
-    await request('POST', '/api/user', { name, email, password }),
+    await request("POST", "/api/user/", { name, email, password }),
 };
 
 export default api;
