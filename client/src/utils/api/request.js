@@ -6,11 +6,16 @@ import { apiLog } from './apiLog';
  * api.js 파일에서만 이 함수에 접근할 수 있습니다.
  */
 const request = async (method, url, payload) => {
+  const userInfo = localStorage.getItem('userInfo');
+  const user = userInfo ? JSON.parse(userInfo) : null;
   apiLog.req(method, url, payload);
   try {
     const res = await axios({
       method,
       url,
+      headers: user && {
+        Authorization: `Bearer ${user.access}`,
+      },
       [method === 'GET' ? 'params' : 'data']: payload,
     });
     apiLog.res(method, url, res);
