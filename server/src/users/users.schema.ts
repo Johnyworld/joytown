@@ -20,7 +20,6 @@ export class User extends Document {
 
   @Prop({ required: true })
   @IsString()
-  @IsNotEmpty()
   password: string;
 
   @Prop()

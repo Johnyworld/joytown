@@ -24,12 +24,13 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/join' element={<Join />} />
       </Routes>
-      <button type='button' onClick={kakaoLogin}>
-        카카오 계정으로 계속
-      </button>
-      {user && (
+      {user ? (
         <button type='button' onClick={logout}>
           로그아웃
+        </button>
+      ) : (
+        <button type='button' onClick={kakaoLogin}>
+          카카오 계정으로 계속
         </button>
       )}
     </BrowserRouter>
