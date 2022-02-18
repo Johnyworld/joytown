@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../stores/userSlice';
 
 const KAKAO_JS_KEY = process.env.REACT_APP_KAKAO_JS_KEY;
 const { Kakao } = window;
@@ -7,6 +9,7 @@ Kakao.init(KAKAO_JS_KEY);
 Kakao.isInitialized();
 
 export default function useKakaoLogin() {
+  const dispatch = useDispatch();
   const { Kakao } = window;
 
   const signIn = useCallback(() => {
@@ -26,7 +29,7 @@ export default function useKakaoLogin() {
           .then(res => {
             console.log('SUCCESS', res);
             if (res.data) {
-              localStorage.setItem('userInfo', JSON.stringify(res.data));
+              dispatch(setUser(res.data));
             }
           })
           .catch(err => {
