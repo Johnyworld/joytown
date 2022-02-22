@@ -63,9 +63,7 @@ const alphabets: string[] = [
   '9',
 ];
 
-export const randomCodeGenerator: (length?: number) => string = (
-  length = 8,
-) => {
+export const randomCodeGenerator: (length?: number) => string = (length = 8) => {
   let result = '';
   for (let i = 0; i < length; i++) {
     result += alphabets[Math.floor(Math.random() * alphabets.length)];
