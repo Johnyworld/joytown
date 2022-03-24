@@ -39,11 +39,15 @@ export class UsersService {
       throw new NotFoundException('user not found');
     }
 
+    const code = await this.usersRepository.createPasswordCode(user);
+
     await this.mailerService.sendMail({
       to: email,
       from: process.env.EMAIL_HOST_USER,
       subject: '이메일 인증 요청 메일입니다.', // Subject line
-      html: '인증 코드 : ' + `<b>Code</b>`, // HTML body content
+      html:
+        '인증 코드 : ' +
+        `<a href="${process.env.HOST_URL}/password-validate?c=${code}" target="_blank">비밀번호 재설정</a>`, // HTML body content
     });
 
     return true;

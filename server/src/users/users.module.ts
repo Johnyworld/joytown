@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/auth/auth.module';
 import { UsersController } from './users.controller';
 import { UsersRepository } from './users.repository';
-import { User, UserSchema } from './users.schema';
+import { Password, PasswordSchema, User, UserSchema } from './users.schema';
 import { UsersService } from './users.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 
@@ -20,7 +20,10 @@ const mailerConfig = {
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+      { name: Password.name, schema: PasswordSchema },
+    ]),
     MailerModule.forRoot(mailerConfig),
     forwardRef(() => AuthModule),
   ],

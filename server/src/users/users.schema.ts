@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, SchemaOptions } from 'mongoose';
+import { Document, SchemaOptions, Types } from 'mongoose';
 import { IsEmail, IsNotEmpty, IsString, IsDateString } from 'class-validator';
+import { Type } from 'class-transformer';
 
 const options: SchemaOptions = {
   timestamps: true,
@@ -40,12 +41,30 @@ export class User extends Document {
 
   @Prop()
   @IsString()
-  farm: number;
+  farm: string;
 
   readonly readOnlyData: { id: string; email: string; name: string };
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+@Schema(options)
+export class Password extends Document {
+  @Prop({ type: Types.ObjectId, required: true, ref: 'users' })
+  @Type(() => User)
+  user: Types.ObjectId;
+
+  @Prop({ required: true })
+  @IsString()
+  @IsNotEmpty()
+  code: string;
+
+  @Prop()
+  @IsString()
+  expired: string;
+}
+
+export const PasswordSchema = SchemaFactory.createForClass(Password);
 
 UserSchema.virtual('readOnlyData').get(function (this: User) {
   return {
