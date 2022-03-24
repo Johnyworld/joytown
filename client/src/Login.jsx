@@ -1,17 +1,16 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './utils/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './stores/userSlice';
 import './Login.scss';
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 import useKakaoLogin from './hooks/useKakaoLogin';
 import { logOut } from './stores/userSlice';
+import LoginForm from './components/LoginForm';
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [details, setDetails] = useState({ email: '', password: '' });
 
   const user = useSelector(state => state.user.userInfo);
   const kakaoLogin = useKakaoLogin();
@@ -19,9 +18,8 @@ export default function Login() {
     dispatch(logOut());
   };
 
-  const submitHandler = async e => {
-    e.preventDefault();
-    const { ok, message, data } = await api.로그인(details);
+  const handler = async (email, password) => {
+    const { ok, message, data } = await api.로그인({ email, password });
     if (!ok) alert(message);
     else {
       alert('잘 됐어요~!', data);
@@ -31,66 +29,14 @@ export default function Login() {
     }
   };
 
-  const [isChecked, setIsChecked] = useState(false);
-
   return (
-    <form onSubmit={submitHandler} className='Login'>
+    <div className='Login'>
       <h2>
         YULMAE<br></br> MARKET
       </h2>
-      <div className='form-wrap'>
-        <div className='form-group'>
-          <label htmlFor='email'> </label>
-          <input
-            type='email'
-            name='email'
-            id='email'
-            onChange={e => setDetails({ ...details, email: e.target.value })}
-            value={details.email}
-            placeholder='아이디(이메일)'
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='email'></label>
-          <input
-            type='password'
-            name='password'
-            id='password'
-            onChange={e => setDetails({ ...details, password: e.target.value })}
-            value={details.password}
-            placeholder='비밀번호'
-          />
-        </div>
-        <label className='login-checkbox'>
-          <input
-            checked={true}
-            type='checkbox'
-            onChange={() => {
-              setIsChecked(!isChecked);
-            }}
-          />
-          <span
-            className={`checkbox ${isChecked ? 'checkbox--active' : ''}`}
-            // This element is purely decorative so
-            // we hide it for screen readers
-            aria-hidden='true'
-            viewBox='0 0 15 10'
-            // fill='none'
-          >
-            <svg
-              width='15'
-              height='10'
-              viewBox='0 0 15 10'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path d='M1 4L6 9L14 1' stroke='#C6C6C6' />
-            </svg>
-          </span>
-          로그인 상태유지
-        </label>
-      </div>
-      <input type='submit' value='로그인' className='btn-login' />
+
+      <LoginForm onSubmit={handler} />
+
       <div className='login-route'>
         <Link to='/join' className='text-link'>
           회원가입
@@ -131,6 +77,6 @@ export default function Login() {
           )}
         </div>
       </div>
-    </form>
+    </div>
   );
 }
