@@ -10,4 +10,9 @@ export class AuthController {
   async login(@Body() body: LoginRequestDto) {
     return await this.authService.jwtLogin(body);
   }
+
+  @Post('kakao')
+  async kakaoAuthCallback(@Body() body) {
+    return await this.authService.kakaoLogin(body);
+  }
 }

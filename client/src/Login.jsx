@@ -1,38 +1,44 @@
-import { useState } from "react";
-import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import api from './utils/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from './stores/userSlice';
+import './Login.scss';
+
+import useKakaoLogin from './hooks/useKakaoLogin';
+import { logOut } from './stores/userSlice';
+import LoginForm from './components/Login/LoginForm';
+import Logo from './components/Login/Logo';
+import LoginChannel from './components/Login/LoginChannel';
+import LoginSNS from './components/Login/LoginSNS';
 
 export default function Login() {
-  const [details, setDetails] = useState({ email: "", password: "" });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    axios.post("/api/user", details).then((res) => console.log(res));
+  const kakaoLogin = useKakaoLogin();
+  const handleLogout = () => {
+    dispatch(logOut());
+  };
+
+  const handler = async (email, password) => {
+    const { ok, message, data } = await api.로그인({ email, password });
+    if (!ok) alert(message);
+    else {
+      alert('잘 됐어요~!', data);
+
+      navigate(`/login?email=${data.email}`);
+      dispatch(setUser(data));
+    }
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <h2>Welcome, Joytown</h2>
-      <div className="form-group">
-        <label htmlFor="email">E-mail : </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          onChange={(e) => setDetails({ ...details, email: e.target.value })}
-          value={details.email}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="email">PassWord : </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={(e) => setDetails({ ...details, password: e.target.value })}
-          value={details.password}
-        />
-      </div>
-      <input type="submit" value="로그인" />
-    </form>
+    <div className='Login'>
+      <Logo />
+
+      <LoginForm onSubmit={handler} />
+
+      <LoginChannel />
+      <LoginSNS onSubmit={(kakaoLogin, handleLogout)} />
+    </div>
   );
 }
