@@ -22,7 +22,7 @@ export class UsersRepository {
     return user;
   }
 
-  async findUserChangingPassword(code: string): Promise<Password | null> {
+  async validateCode(code: string): Promise<Password | null> {
     const password = await this.passwordModel.findOne({ code });
     if (!password) return null;
     const now = new Date().toISOString();
