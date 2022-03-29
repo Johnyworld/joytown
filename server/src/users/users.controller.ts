@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post, Put, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
+import { UserChangePasswordDto } from './dto/user.changePassword.dto';
 import { UserRequestDto } from './dto/user.request.dto';
 import { UserSendEmailDto } from './dto/user.sendEmail.dto';
 import { UserValidateCodeDto } from './dto/user.validateCode.dto';
@@ -31,9 +32,8 @@ export class UsersController {
     return await this.userService.validateCode(body);
   }
 
-  // @Get('password')
-  // async validateCode() {}
-
-  // @Put('password')
-  // async changePassword() {}
+  @Put('password')
+  async changePassword(@Body() body: UserChangePasswordDto) {
+    return await this.userService.changePassword(body);
+  }
 }

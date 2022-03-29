@@ -52,7 +52,7 @@ export const UserSchema = SchemaFactory.createForClass(User);
 export class Password extends Document {
   @Prop({ type: Types.ObjectId, required: true, ref: 'users' })
   @Type(() => User)
-  user: Types.ObjectId;
+  user: string;
 
   @Prop({ required: true })
   @IsString()

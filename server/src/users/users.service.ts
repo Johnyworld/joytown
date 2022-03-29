@@ -5,6 +5,7 @@ import { UsersRepository } from './users.repository';
 import { UserSendEmailDto } from './dto/user.sendEmail.dto';
 import { MailerService } from '@nestjs-modules/mailer';
 import { UserValidateCodeDto } from './dto/user.validateCode.dto';
+import { UserChangePasswordDto } from './dto/user.changePassword.dto';
 
 @Injectable()
 export class UsersService {
@@ -61,5 +62,19 @@ export class UsersService {
       throw new NotFoundException('code is wrong');
     }
     return { expiredAt: pw.expiredAt };
+  }
+
+  async changePassword(body: UserChangePasswordDto) {
+    const { code, password } = body;
+    const pw = await this.usersRepository.validateCode(code);
+    if (!pw) {
+      throw new NotFoundException('code is wrong');
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await this.usersRepository.changePassword(pw.user, hashedPassword);
+    if (!user) {
+      throw new NotFoundException('code is wrong');
+    }
+    return user.readOnlyData;
   }
 }

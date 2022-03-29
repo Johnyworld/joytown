@@ -46,4 +46,10 @@ export class UsersRepository {
     await this.passwordModel.create({ code, user: user.id, expiredAt: then.toISOString() });
     return code;
   }
+
+  async changePassword(id: string, password: string): Promise<User | null> {
+    const user = await this.userModel.findByIdAndUpdate(id, { password });
+    if (!user) return null;
+    return user;
+  }
 }
