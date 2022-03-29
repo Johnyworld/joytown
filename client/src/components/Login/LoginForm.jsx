@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import './LoginForm.scss';
 
 function LoginForm({ onSubmit }) {
   const [details, setDetails] = useState({ email: '', password: '' });
