@@ -61,7 +61,7 @@ export class Password extends Document {
 
   @Prop()
   @IsString()
-  expired: string;
+  expiredAt: string;
 }
 
 export const PasswordSchema = SchemaFactory.createForClass(Password);

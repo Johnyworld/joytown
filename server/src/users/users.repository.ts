@@ -22,6 +22,14 @@ export class UsersRepository {
     return user;
   }
 
+  async findUserChangingPassword(code: string): Promise<Password | null> {
+    const password = await this.passwordModel.findOne({ code });
+    if (!password) return null;
+    const now = new Date().toISOString();
+    if (password.expiredAt < now) return null;
+    return password;
+  }
+
   async existsByEmail(email: string): Promise<boolean> {
     const result = await this.userModel.exists({ email });
     return result;
@@ -35,7 +43,7 @@ export class UsersRepository {
     const code = randomCodeGenerator(18);
     const then = new Date();
     then.setMinutes(then.getMinutes() + 5);
-    await this.passwordModel.create({ code, user: user.id, expired: then.toISOString() });
+    await this.passwordModel.create({ code, user: user.id, expiredAt: then.toISOString() });
     return code;
   }
 }

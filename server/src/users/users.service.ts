@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { UsersRepository } from './users.repository';
 import { UserSendEmailDto } from './dto/user.sendEmail.dto';
 import { MailerService } from '@nestjs-modules/mailer';
+import { UserValidatePasswordDto } from './dto/user.validatePassword.dto';
 
 @Injectable()
 export class UsersService {
@@ -51,5 +52,14 @@ export class UsersService {
     });
 
     return true;
+  }
+
+  async validatePassword(body: UserValidatePasswordDto) {
+    const { code } = body;
+    const pw = await this.usersRepository.findUserChangingPassword(code);
+    if (!pw) {
+      throw new NotFoundException('code is wrong');
+    }
+    return { expiredAt: pw.expiredAt };
   }
 }
