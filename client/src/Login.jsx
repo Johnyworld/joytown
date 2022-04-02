@@ -38,7 +38,7 @@ export default function Login() {
       <LoginForm onSubmit={handler} />
 
       <LoginChannel />
-      <LoginSNS onSubmit={(kakaoLogin, handleLogout)} />
+      <LoginSNS onClickKakao={kakaoLogin} />
     </div>
   );
 }

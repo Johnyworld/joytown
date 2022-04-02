@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import './LoginSNS.scss';
 
-function LoginSNS({ onSubmit }) {
+function LoginSNS({ onSubmit, onClickKakao }) {
   const user = useSelector(state => state.user.userInfo);
   const submitHandler = e => {
     e.preventDefault();
@@ -25,7 +25,7 @@ function LoginSNS({ onSubmit }) {
             <button type='button' onClick={() => {}}>
               <img className='img-sns' src={require('../../img/btn-naver.png')} />
             </button>
-            <button type='button' onClick={() => {}}>
+            <button type='button' onClick={onClickKakao}>
               <img className='img-sns' src={require('../../img/btn-kakao.png')} />
             </button>
             <button type='button' onClick={() => {}}>

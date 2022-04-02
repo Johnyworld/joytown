@@ -18,6 +18,7 @@ function LoginForm({ onSubmit }) {
         <div className='form-group'>
           <label htmlFor='email'> </label>
           <input
+            className='input-box'
             type='email'
             name='email'
             id='email'
@@ -29,6 +30,7 @@ function LoginForm({ onSubmit }) {
         <div className='form-group'>
           <label htmlFor='email'></label>
           <input
+            className='input-box'
             type='password'
             name='password'
             id='password'

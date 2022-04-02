@@ -1,0 +1,16 @@
+@import './reset.scss';
+
+$타이틀텍스트: #3a3a3a;
+
+.join-wrap {
+  max-width: 30em;
+  margin: 0 auto;
+  padding: 0 2em;
+}
+.title {
+  color: $타이틀텍스트;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 20px 0 32px 0;
+  display: flex;
+}
