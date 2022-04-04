@@ -36,6 +36,63 @@ $타이틀텍스트: #3a3a3a;
   }
 }
 
+.join-checkbox {
+  display: flex;
+  padding: 60px 0 12px 0px;
+  border-bottom: 1px solid #c6c6c6;
+
+  input[type='checkbox'] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 24px;
+    height: 24px;
+    background: #000;
+  }
+  .checkbox {
+    display: inline-block; // set to `inline-block` as `inline elements ignore `height` and `width`
+    height: 24px;
+    width: 24px;
+    border: 1px solid #c6c6c6;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-right: 4px;
+  }
+
+  .checkbox--active {
+    border-color: $메인칼라;
+    background: $메인칼라;
+  }
+}
+
+.join-check {
+  display: flex;
+  padding: 12px 0 0px 0px;
+
+  input[type='checkbox'] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 24px;
+    height: 24px;
+    background: #000;
+  }
+  .checkbox {
+    display: inline-block; // set to `inline-block` as `inline elements ignore `height` and `width`
+    height: 24px;
+    width: 24px;
+    margin-right: 4px;
+  }
+
+  .checkbox--active {
+    color: $메인칼라;
+  }
+}
+
 .btn-fixed {
   background: $메인칼라;
   width: 100%;
@@ -43,4 +100,7 @@ $타이틀텍스트: #3a3a3a;
   font-weight: bold;
   font-size: 16px;
   color: white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
