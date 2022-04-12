@@ -35,10 +35,12 @@ $타이틀텍스트: #3a3a3a;
     position: absolute;
   }
 }
-
+.join-checkbox-wrap {
+  padding: 60px 0 100px 0px;
+}
 .join-checkbox {
   display: flex;
-  padding: 60px 0 12px 0px;
+  padding: 0 0 12px 0px;
   border-bottom: 1px solid #c6c6c6;
 
   input[type='checkbox'] {
@@ -58,12 +60,15 @@ $타이틀텍스트: #3a3a3a;
     border: 1px solid #c6c6c6;
     box-sizing: border-box;
     border-radius: 4px;
-    margin-right: 4px;
+    margin-right: 8px;
   }
 
   .checkbox--active {
     border-color: $메인칼라;
     background: $메인칼라;
+    .checkbox-active {
+      fill: white;
+    }
   }
 }
 
@@ -90,6 +95,9 @@ $타이틀텍스트: #3a3a3a;
 
   .checkbox--active {
     color: $메인칼라;
+    .check-active {
+      fill: $메인칼라;
+    }
   }
 }
 

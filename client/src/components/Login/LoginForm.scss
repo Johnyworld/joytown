@@ -37,12 +37,15 @@ $메인칼라: #079c28;
     border: 1px solid #c6c6c6;
     box-sizing: border-box;
     border-radius: 4px;
-    margin-right: 4px;
+    margin-right: 8px;
   }
 
   .checkbox--active {
     border-color: $메인칼라;
     background: $메인칼라;
+    .checkbox-active {
+      fill: white;
+    }
   }
 }
 
@@ -52,4 +55,6 @@ $메인칼라: #079c28;
   height: 60px;
   border-radius: 8px;
   color: white;
+  font-weight: bold;
+  font-size: 16px;
 }
