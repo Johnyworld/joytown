@@ -74,7 +74,7 @@ function LoginForm({ onSubmit }) {
         </label>
       </div>
       <input type='submit' value='로그인' className='btn-login' />
-      <Button label='로그인해주세요' />
+      <Button label='로그인' />
     </form>
   );
 }
