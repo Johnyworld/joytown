@@ -1,0 +1,77 @@
+@import '../../style/color.scss';
+
+.btn {
+  font-weight: 400;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border: 1px solid;
+  display: inline-block;
+  line-height: 1;
+
+  &--small {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  &--medium {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  &--large {
+    padding: 12px 24px;
+    font-size: 16px;
+    width: 100%;
+    height: 60px;
+    font-weight: bold;
+  }
+
+  &--fixed {
+    width: 100%;
+    height: 60px;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  }
+
+  // &--solid--primary {
+  //   background-color: var(--primary);
+  //   border-color: var(--primary);
+  //   color: var(--white);
+  // }
+
+  // &--solid--success {
+  //   background-color: var(--success);
+  //   border-color: var(--success);
+  //   color: var(--white);
+  // }
+
+  // &--solid--danger {
+  //   background-color: var(--danger);
+  //   border-color: var(--danger);
+  //   color: var(--white);
+  // }
+
+  // &--solid--warning {
+  //   background-color: var(--warning);
+  //   border-color: var(--warning);
+  //   color: var(--white);
+  // }
+
+  @each $key, $value in $colors {
+    &--solid--#{$key} {
+      background-color: var(--#{$key});
+      border-color: var(--#{$key});
+      color: var(--white);
+    }
+  }
+}
+
+.btn:hover {
+  background-color: #078f24;
+  border-color: #078f24;
+}

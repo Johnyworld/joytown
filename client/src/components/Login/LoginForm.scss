@@ -1,5 +1,3 @@
-$메인칼라: #079c28;
-
 .form-group {
   padding-bottom: 12px;
   .input-box {
@@ -41,8 +39,8 @@ $메인칼라: #079c28;
   }
 
   .checkbox--active {
-    border-color: $메인칼라;
-    background: $메인칼라;
+    border-color: var(--primary);
+    background: var(--primary);
     .checkbox-active {
       fill: white;
     }
@@ -50,7 +48,7 @@ $메인칼라: #079c28;
 }
 
 .btn-login {
-  background: $메인칼라;
+  background: var(--primary);
   width: 100%;
   height: 60px;
   border-radius: 8px;

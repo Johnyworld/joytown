@@ -1,6 +1,7 @@
 import React from 'react';
 import './JoinForm.scss';
 import { useState } from 'react';
+import ButtonTest from '../Button/ButtonTest';
 
 function JoinForm({ onSubmit }) {
   const [details, setDetails] = useState({ name: '', email: '', password: '', repassword: '' });
@@ -133,7 +134,9 @@ function JoinForm({ onSubmit }) {
         })}
       </div>
 
-      <input type='submit' value='가입하기' className='btn-fixed' />
+      <ButtonTest type='submit' buttonColor='primary' buttonSize='fixed' buttonStyle='solid'>
+        가입하기
+      </ButtonTest>
     </form>
   );
 }

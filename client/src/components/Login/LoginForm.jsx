@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import Button from '../Button';
+import ButtonTest from '../Button'; //이거는 파일경로 폴더명 적는거!
 import './LoginForm.scss';
 
 function LoginForm({ onSubmit }) {
@@ -73,8 +73,9 @@ function LoginForm({ onSubmit }) {
           로그인 상태유지
         </label>
       </div>
-      <input type='submit' value='로그인' className='btn-login' />
-      <Button label='로그인' />
+      <ButtonTest type='submit' buttonColor='primary' buttonSize='large' buttonStyle='solid'>
+        로그인
+      </ButtonTest>
     </form>
   );
 }
