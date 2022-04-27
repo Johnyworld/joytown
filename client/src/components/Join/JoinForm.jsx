@@ -2,6 +2,9 @@ import React from 'react';
 import './JoinForm.scss';
 import { useState } from 'react';
 import ButtonTest from '../Button/ButtonTest';
+import Input from '../Input';
+import { Link } from 'react-router-dom';
+import Login from '../../Login';
 
 function JoinForm({ onSubmit }) {
   const [details, setDetails] = useState({ name: '', email: '', password: '', repassword: '' });
@@ -15,59 +18,77 @@ function JoinForm({ onSubmit }) {
 
   var 체크 = ['[필수] 이용약관동의', '[필수] 개인정보 처리방침 동의'];
 
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    birthday: '',
+    password: '',
+    confirmPassword: '',
+  }); //이렇게 했을때, 계속해서 기입할때마다 재랜더링이 된다.
+
+  const inputs = [
+    {
+      id: 1,
+      name: '이름',
+      type: 'text',
+      placeholder: 'ex)홍길동',
+      label: '이름',
+      errorMessage: '본인 이름을 적어주세요.',
+      required: true,
+      pattern: '[가-힣]{2,7}',
+    },
+    {
+      id: 2,
+      name: 'E-mail',
+      type: 'email',
+      placeholder: 'ex)123@naver.com',
+      label: '이메일',
+      errorMessage: '이메일 주소로 입력해주세요.',
+      required: true,
+    },
+    {
+      id: 3,
+      name: '생년월일',
+      type: 'date',
+      placeholder: '생년월일을 선택해주세요.',
+      label: '생년월일',
+    },
+
+    {
+      id: 4,
+      name: '비밀번호',
+      type: 'text',
+      placeholder: '영문, 숫자,를 포함한 8자 이상의 비밀번호를 입력해주세요.',
+      label: '비밀번호',
+      required: true,
+      pattern: `^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      errorMessage: '영문, 숫자,를 포함한 8자 이상의 비밀번호를 입력해주세요.',
+    },
+    {
+      id: 5,
+      name: '비밀번호 확인',
+      type: 'text',
+      placeholder: '비밀번호를 한 번 더 입력해주세요.',
+      label: '비밀번호 확인',
+      errorMessage: '같은 비밀번호를 입력해주세요!',
+      pattern: values.password,
+      required: true,
+    },
+  ];
+
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
+
+  const onChange = e => {
+    setValues({ ...values, [e.target.name]: e.target.value }); //
+  };
+
   return (
     <form onSubmit={submitHandler}>
-      <div className='form-group-line'>
-        <label htmlFor='name' className='join-input-text'>
-          이름{' '}
-        </label>
-        <input
-          className='input-line'
-          type='name'
-          name='name'
-          id='name'
-          onChange={e => setDetails({ ...details, name: e.target.value })}
-          value={details.name}
-          placeholder='본인 이름을 입력해주세요.'
-        />
-      </div>
-      <div className='form-group-line'>
-        <label htmlFor='email' className='join-input-text'>
-          아이디{' '}
-        </label>
-        <input
-          className='input-line'
-          type='email'
-          name='email'
-          id='email'
-          onChange={e => setDetails({ ...details, email: e.target.value })}
-          value={details.email}
-          placeholder='아이디(이메일)'
-        />
-      </div>
-      <div className='form-group-line'>
-        <label htmlFor='email' className='join-input-text'>
-          비밀번호{' '}
-        </label>
-        <input
-          className='input-line'
-          type='password'
-          name='password'
-          id='password'
-          onChange={e => setDetails({ ...details, password: e.target.value })}
-          value={details.password}
-          placeholder='비밀번호 입력'
-        />
-        <input
-          className='input-line-repeat'
-          type='password'
-          name='repassword'
-          id='repassword'
-          onChange={e => setDetails({ ...details, repassword: e.target.value })}
-          value={details.repassword}
-          placeholder='비밀번호를 한번더 입력해주세요.'
-        />
-      </div>
+      {inputs.map(input => (
+        <Input key={input.id} {...input} value={values[input.name]} onChange={onChange} />
+      ))}
 
       <div className='join-checkbox-wrap'>
         <label className='join-checkbox'>
@@ -134,9 +155,14 @@ function JoinForm({ onSubmit }) {
         })}
       </div>
 
-      <ButtonTest type='submit' buttonColor='primary' buttonSize='fixed' buttonStyle='solid'>
+      <ButtonTest type='submit' buttonColor='primary' buttonSize='large' buttonStyle='solid'>
         가입하기
       </ButtonTest>
+
+      <div className='join-not'>
+        <p>이미 아이디가 있으신가요?</p>
+        <Link to='/login'>로그인</Link>
+      </div>
     </form>
   );
 }

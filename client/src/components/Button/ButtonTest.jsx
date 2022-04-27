@@ -16,6 +16,7 @@ import './ButtonTest.scss';
 // const SIZE = ['btn--medium', 'btn--small'];
 
 const ButtonTest = ({ children, type, onClick, buttonStyle, buttonColor, buttonSize }) => {
+  // 버튼 사이즈 클래스 네임이 사이즈인 경우
   const buttonSizeClassName = 'btn--' + buttonSize;
 
   // outline 인 경우 border, color : "c-COLOR",
@@ -25,7 +26,7 @@ const ButtonTest = ({ children, type, onClick, buttonStyle, buttonColor, buttonS
 
   return (
     <button
-      className={`btn ${buttonSizeClassName} ${buttonStyleClassName}`}
+      className={`btn ${buttonSizeClassName} ${buttonStyleClassName}`} //클래스 3개 들어가 있는 거 (띄어쓰기 체크!)
       onClick={onClick}
       type={type}
     >
@@ -34,6 +35,8 @@ const ButtonTest = ({ children, type, onClick, buttonStyle, buttonColor, buttonS
   );
 };
 
+
+//버튼 컴포넌트 어떤 형식의 스타일 항목이 있는지 
 ButtonTest.propTypes = {
   buttonStyle: PropTypes.oneOf(['solid', 'outline']),
   buttonColor: PropTypes.oneOf(['primary', 'secondary', 'danger', 'success']),
@@ -41,6 +44,8 @@ ButtonTest.propTypes = {
   onClick: PropTypes.func,
 };
 
+
+//기본 컴포넌트 스타일이 뭔지
 ButtonTest.defaultProps = {
   buttonStyle: 'solid',
   buttonColor: 'primary',

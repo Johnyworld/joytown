@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import api from './utils/api';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from './stores/userSlice';
 import './Login.scss';
 
