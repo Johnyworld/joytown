@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { store } from './store';
 import { Provider } from 'react-redux';
+import './style/index.scss';
 
 axios.interceptors.response.use(function (response) {
   return response.data;

@@ -1,0 +1,52 @@
+$colors: (
+  primary: #079c28,
+  secondary: #7b9cff,
+  danger: #eb3f27,
+  success: #75fa83,
+  orange: orange,
+  sang: rgb(53, 150, 225),
+);
+
+:root {
+  // --primary: #079c28;
+  // --warning: #ffd028;
+  // --danger: #eb3f27;
+  // --success: #75fa83;
+
+  @each $key, $value in $colors {
+    --#{$key}: #{$value};
+  }
+
+  --white: #ffffff;
+  --dark: #181717;
+}
+
+// .c-primary {
+//   color: var(--primary);
+// }
+//
+// .c-warning {
+//   color: var(--warning);
+// }
+// ...
+
+@each $key, $value in $colors {
+  .c-#{$key} {
+    color: var(--#{$key});
+  }
+}
+
+// .bgc-primary {
+//   background-color: var(--primary);
+// }
+//
+// .bgc-warning {
+//   background-color: var(--warning);
+// }
+// ...
+
+@each $key, $value in $colors {
+  .bgc-#{$key} {
+    background-color: var(--#{$key});
+  }
+}

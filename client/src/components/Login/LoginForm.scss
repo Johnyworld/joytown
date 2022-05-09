@@ -1,53 +1,58 @@
-.form-wrap {
-  .form-group {
-    padding: 5px;
-    input {
-      width: 100%;
-      height: 50px;
-      border: 1px solid #c6c6c6;
-      box-sizing: border-box;
-      border-radius: 8px;
-    }
-    input::placeholder {
-      font-size: 14px;
-      color: #c6c6c6;
-      padding: 12px;
-    }
+.form-group {
+  padding-bottom: 12px;
+  .input-box {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #c6c6c6;
+    box-sizing: border-box;
+    border-radius: 8px;
   }
-  .login-checkbox {
-    display: flex;
-    padding: 15px 0 25px 4px;
+  .input-box::placeholder {
+    font-size: 14px;
+    color: #c6c6c6;
+    padding: 12px;
+  }
+}
+.login-checkbox {
+  display: flex;
+  padding: 0 0 30px 0px;
+  border-bottom: 1px solid #c6c6c6;
 
-    input[type='checkbox'] {
-      clip: rect(0 0 0 0);
-      clip-path: inset(50%);
-      overflow: hidden;
-      position: absolute;
-      white-space: nowrap;
-      width: 24px;
-      height: 24px;
-      background: #000;
-    }
-    .checkbox {
-      display: inline-block; // set to `inline-block` as `inline elements ignore `height` and `width`
-      height: 24px;
-      width: 24px;
-      border: 1px solid #c6c6c6;
-      box-sizing: border-box;
-      border-radius: 4px;
-      margin-right: 4px;
-    }
+  input[type='checkbox'] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 24px;
+    height: 24px;
+    background: #000;
+  }
+  .checkbox {
+    display: inline-block; // set to `inline-block` as `inline elements ignore `height` and `width`
+    height: 24px;
+    width: 24px;
+    border: 1px solid #c6c6c6;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
 
-    .checkbox--active {
-      border-color: #079c28;
-      background: #079c28;
+  .checkbox--active {
+    border-color: var(--primary);
+    background: var(--primary);
+    .checkbox-active {
+      fill: white;
     }
   }
 }
+
 .btn-login {
-  background: #079c28;
-  width: 343px;
+  background: var(--primary);
+  width: 100%;
   height: 60px;
   border-radius: 8px;
   color: white;
+  font-weight: bold;
+  font-size: 16px;
 }
