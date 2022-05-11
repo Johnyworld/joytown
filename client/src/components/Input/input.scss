@@ -1,60 +1,48 @@
 @import '../../style/color.scss';
 
-.formInput {
+.input {
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 0 0 30px 0;
-  .join-input-text {
+  .input__label {
     font-weight: bold;
     font-size: 16px;
     display: flex;
+    padding-bottom: 10px;
+  }
+  .input__commnet {
+    display: flex;
+    text-align: left;
+    font-size: 12px;
+    padding: 0px 0 8px 0;
+    margin: -4px 0 0 0;
   }
 
-  .input-line {
-    width: 100%;
-    height: 40px;
-    border-bottom: 1px solid #c6c6c6;
+  &-input {
+    border: 1px solid #c6c6c6;
+    border-radius: 8px;
     box-sizing: border-box;
+    height: 48px;
     padding: 12px;
-  }
-  .input-line::placeholder {
-    font-size: 14px;
-    color: #c6c6c6;
-  }
-  .input-line:invalid[focused='true'] {
-    border-bottom: 1px solid red;
-  }
 
-  .input-line:invalid[focused='true'] ~ span {
-    display: block;
-  }
-  .input-line-repeat {
-    width: 100%;
-    height: 40px;
-    border-bottom: 1px solid #c6c6c6;
-    box-sizing: border-box;
-    margin-top: 8px;
-    padding: 12px;
-  }
-  .input-line-repeat::placeholder {
-    font-size: 14px;
-    color: #c6c6c6;
+    &::placeholder {
+      font-size: 14px;
+      color: #c6c6c6;
+    }
 
-    position: absolute;
+    &--error {
+      border: 1px solid red;
+    }
+    &:focus {
+      border: 2px solid var(--primary);
+    }
   }
-}
-
-.join-input-text {
-  font-weight: bold;
-  font-size: 16px;
-  display: flex;
-  padding-bottom: 4px;
 }
 
 .errorMessage {
   font-size: 12px;
-  padding: 3px;
+  padding: 3px 12px;
   color: red;
-  display: none;
+  display: flex;
 }

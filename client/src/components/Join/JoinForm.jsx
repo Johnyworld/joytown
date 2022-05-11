@@ -7,13 +7,29 @@ import { Link } from 'react-router-dom';
 import Login from '../../Login';
 
 function JoinForm({ onSubmit }) {
-  const [details, setDetails] = useState({ name: '', email: '', password: '', repassword: '' });
+  const [details, setDetails] = useState({
+    name: '',
+    email: '',
+    password: '',
+    repassword: '',
+    birthday: '',
+    address: '',
+    phoneNumber: '',
+  });
   const [isChecked, setIsChecked] = useState(false);
 
   const submitHandler = e => {
     e.preventDefault();
     console.log(details);
-    onSubmit(details.name, details.email, details.password, details.repassword);
+    onSubmit(
+      details.name,
+      details.email,
+      details.password,
+      details.repassword,
+      details.address,
+      details.birthday,
+      details.phoneNumber,
+    );
   };
 
   var 체크 = ['[필수] 이용약관동의', '[필수] 개인정보 처리방침 동의'];
@@ -24,22 +40,26 @@ function JoinForm({ onSubmit }) {
     birthday: '',
     password: '',
     confirmPassword: '',
+    address: '',
+    phoneNumber: '',
   }); //이렇게 했을때, 계속해서 기입할때마다 재랜더링이 된다.
+
+  const [errors, setErrors] = useState([]);
 
   const inputs = [
     {
       id: 1,
-      name: '이름',
+      name: 'username',
       type: 'text',
       placeholder: 'ex)홍길동',
       label: '이름',
       errorMessage: '본인 이름을 적어주세요.',
       required: true,
-      pattern: '[가-힣]{2,7}',
+      pattern: /[가-힣]{2,7}/,
     },
     {
       id: 2,
-      name: 'E-mail',
+      name: 'email',
       type: 'email',
       placeholder: 'ex)123@naver.com',
       label: '이메일',
@@ -48,31 +68,49 @@ function JoinForm({ onSubmit }) {
     },
     {
       id: 3,
-      name: '생년월일',
-      type: 'date',
-      placeholder: '생년월일을 선택해주세요.',
-      label: '생년월일',
-    },
-
-    {
-      id: 4,
-      name: '비밀번호',
+      name: 'password',
       type: 'text',
-      placeholder: '영문, 숫자,를 포함한 8자 이상의 비밀번호를 입력해주세요.',
+      placeholder: '비밀번호를 입력해주세요.',
       label: '비밀번호',
+      comment: '영문대소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.',
       required: true,
-      pattern: `^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      pattern: /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/,
       errorMessage: '영문, 숫자,를 포함한 8자 이상의 비밀번호를 입력해주세요.',
     },
     {
-      id: 5,
-      name: '비밀번호 확인',
+      id: 4,
+      name: 'confirmPassword',
       type: 'text',
       placeholder: '비밀번호를 한 번 더 입력해주세요.',
       label: '비밀번호 확인',
       errorMessage: '같은 비밀번호를 입력해주세요!',
-      pattern: values.password,
       required: true,
+    },
+    {
+      id: 5,
+      name: 'phoneNumber',
+      type: 'number',
+      placeholder: 'ex)01012345678',
+      label: '핸드폰 번호',
+      comment: '핸드폰이 없을 시, 보호자 번호를 입력해주세요.',
+      pattern: /[0-9]{10,11}/,
+      errorMessage: '숫자만 입력해주세요.',
+      required: true,
+    },
+    {
+      id: 6,
+      name: 'birthday',
+      type: 'date',
+      placeholder: '생년월일을 선택해주세요.',
+      label: '생년월일',
+    },
+    {
+      id: 7,
+      name: 'address',
+      type: 'text',
+      placeholder: 'ex)다산로32,남산타운 제 2상가 3층 301호',
+      label: '주소',
+      comment: '도로명 주소와 상세주소를 입력해주세요.',
     },
   ];
 
@@ -81,13 +119,36 @@ function JoinForm({ onSubmit }) {
   };
 
   const onChange = e => {
-    setValues({ ...values, [e.target.name]: e.target.value }); //
+    const targetName = e.target.name;
+    setValues({ ...values, [targetName]: e.target.value });
+    const item = inputs.find(item => item.name === e.target.name);
+
+    const isInvalid = item?.pattern && !item?.pattern?.test(e.target.value);
+    const isErrorConfirmPassword =
+      targetName === 'confirmPassword' && e.target.value !== values.password;
+
+    if (isInvalid || isErrorConfirmPassword) {
+      if (!errors.includes(targetName)) {
+        setErrors([...errors, targetName]);
+      }
+    } else {
+      setErrors(errors.filter(err => err !== targetName));
+    }
   };
+
+  console.log(errors);
 
   return (
     <form onSubmit={submitHandler}>
       {inputs.map(input => (
-        <Input key={input.id} {...input} value={values[input.name]} onChange={onChange} />
+        <Input
+          key={input.id}
+          {...input}
+          value={values[input.name]}
+          onChange={onChange}
+          isError={errors.includes(input.name)}
+          errorMessage={input.errorMessage}
+        />
       ))}
 
       <div className='join-checkbox-wrap'>

@@ -1,43 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './input.scss';
-import { useState } from 'react';
 
 const Input = props => {
-  const [focused, setFocused] = useState(false);
-  const { label, errorMessage, onChange, id, ...inputProps } = props;
+  const { label, errorMessage, isError, name, value, type, placeholder, comment, onChange } = props;
 
-  const handleFocus = e => {
-    setFocused(true);
-  };
   return (
-    <div className='formInput'>
-      <label className='join-input-text'>{label}</label>
+    <div className={'input'}>
+      {label && <label className={`input__label`}>{label}</label>}
+      {comment && <div className={`input__commnet`}>{comment}</div>}
       <input
-        className='input-line'
-        {...inputProps}
+        name={name}
+        className={`input-input ${isError ? 'input-input--error' : ''}`}
+        value={value}
+        type={type}
         onChange={onChange}
-        onBlur={handleFocus}
-        onFocus={() => inputProps.name === 'confirmPassword' && setFocused(true)}
-        focused={focused.toString()}
+        placeholder={placeholder}
       />
-      <span className='errorMessage'>{errorMessage}</span>
+      {isError && <span className='errorMessage'>{errorMessage}</span>}
     </div>
   );
 };
 
 Input.propTypes = {
-  InputStyle: PropTypes.oneOf(['face', 'border', 'bottomline']),
-  InputColor: PropTypes.oneOf(['default', 'primary', 'secondary', 'danger', 'success']),
-  InputSize: PropTypes.oneOf(['small', 'medium', 'large', 'fixed']),
-  onClick: PropTypes.func,
+  label: PropTypes.string,
+  errorMessage: PropTypes.string,
+  isError: PropTypes.bool,
+  name: PropTypes.string,
+  pattern: PropTypes.string,
+  value: PropTypes.string,
+  type: PropTypes.oneOf(['text', 'number', 'email', 'password', 'date']),
+  onChange: PropTypes.func,
 };
 
 //기본 컴포넌트 스타일이 뭔지
-Input.defaultProps = {
-  InputStyl: 'bottomline',
-  InputColor: 'default',
-  InputSize: 'medium',
-};
+Input.defaultProps = {};
 
 export default Input;
