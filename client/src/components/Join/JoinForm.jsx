@@ -114,10 +114,6 @@ function JoinForm({ onSubmit }) {
     },
   ];
 
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
-
   const onChange = e => {
     const targetName = e.target.name;
     setValues({ ...values, [targetName]: e.target.value });
