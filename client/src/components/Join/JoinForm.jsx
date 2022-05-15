@@ -4,9 +4,11 @@ import { useState } from 'react';
 import ButtonTest from '../Button/ButtonTest';
 import Input from '../Input';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Login from '../../Login';
 
 function JoinForm({ onSubmit }) {
+  let navigate = useNavigate();
   const [details, setDetails] = useState({
     name: '',
     email: '',
@@ -114,6 +116,10 @@ function JoinForm({ onSubmit }) {
     },
   ];
 
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  // };
+
   const onChange = e => {
     const targetName = e.target.name;
     setValues({ ...values, [targetName]: e.target.value });
@@ -212,7 +218,15 @@ function JoinForm({ onSubmit }) {
         })}
       </div>
 
-      <ButtonTest type='submit' buttonColor='primary' buttonSize='large' buttonStyle='solid'>
+      <ButtonTest
+        onClick={() => {
+          navigate('/JoinCheck');
+        }}
+        type='submit'
+        buttonColor='primary'
+        buttonSize='large'
+        buttonStyle='solid'
+      >
         가입하기
       </ButtonTest>
 
