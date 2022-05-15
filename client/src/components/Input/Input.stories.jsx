@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonTest from './Input';
+import Input from './Input';
 
 export default {
   title: 'Input',
@@ -7,14 +7,31 @@ export default {
 };
 const Template = args => <Input {...args}></Input>;
 
-export const primary = Template.bind({});
-primary.args = {
-  buttonColor: 'primary',
-  label: 'Press Me',
+export const Default = Template.bind({});
+Default.args = {
+  name: 'name',
+  type: 'text',
 };
 
-export const secondary = Template.bind({});
-secondary.args = {
-  buttonColor: 'secondary',
-  label: 'Press Me',
+export const label = Template.bind({});
+label.args = {
+  name: 'name',
+  label: 'Name',
+  type: 'text',
+};
+
+export const labelComment = Template.bind({});
+labelComment.args = {
+  name: 'name',
+  label: 'Name',
+  comment: 'input값에 대한 추가 설명',
+  type: 'text',
+};
+
+export const err = Template.bind({});
+err.args = {
+  name: 'name',
+  label: 'Name',
+  errorMessage: 'Error!!',
+  type: 'text',
 };

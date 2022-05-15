@@ -5,6 +5,7 @@ import useKakaoLogin from './hooks/useKakaoLogin';
 import { useSelector, useDispatch } from 'react-redux';
 import { logOut } from './stores/userSlice';
 import './App.scss';
+import JoinCheck from './components/JoinCheck/JoinCheck';
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/join' element={<Join />} />
+          <Route path='/JoinCheck' element={<JoinCheck />} />
         </Routes>
         {/* {user ? (
           <button type='button' onClick={handleLogout}>

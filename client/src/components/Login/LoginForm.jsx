@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import ButtonTest from '../Button'; //이거는 파일경로 폴더명 적는거!
 import './LoginForm.scss';
+import Input from '../Input';
 
 function LoginForm({ onSubmit }) {
   const [details, setDetails] = useState({ email: '', password: '' });
@@ -12,34 +13,33 @@ function LoginForm({ onSubmit }) {
     console.log(details);
     onSubmit(details.email, details.password);
   };
+  const inputs = [
+    {
+      id: 1,
+      name: 'email',
+      type: 'email',
+      placeholder: '이메일',
+    },
+    {
+      id: 2,
+      name: 'password',
+      type: 'password',
+      placeholder: '비밀번호',
+    },
+  ];
+
+  const onChange = e => {
+    const targetName = e.target.name;
+    setDetails({ ...details, [targetName]: e.target.value });
+  };
 
   return (
     <form onSubmit={submitHandler}>
       <div className='form-wrap'>
-        <div className='form-group'>
-          <label htmlFor='email'> </label>
-          <input
-            className='input-box'
-            type='email'
-            name='email'
-            id='email'
-            onChange={e => setDetails({ ...details, email: e.target.value })}
-            value={details.email}
-            placeholder='아이디(이메일)'
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='email'></label>
-          <input
-            className='input-box'
-            type='password'
-            name='password'
-            id='password'
-            onChange={e => setDetails({ ...details, password: e.target.value })}
-            value={details.password}
-            placeholder='비밀번호'
-          />
-        </div>
+        {inputs.map(input => (
+          <Input key={input.id} {...input} onChange={onChange} value={details[input.name]} />
+        ))}
+
         <label className='login-checkbox'>
           <input
             checked={true}
