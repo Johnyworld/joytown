@@ -9,7 +9,7 @@ export default function JoinCheck() {
   return (
     <div className='Joinckeck'>
       <div className='Joincheck-check'>
-        <ImageIcon name={'check'} />
+        <ImageIcon name={'check'} imageIconSize='medium' imageIconColor='primary' />
       </div>
       <div className='JoinCheck-message'>
         회원가입이 <br />

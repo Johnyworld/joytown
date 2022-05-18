@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import './ImageIcon.scss';
 
 const ImageIcons = {
   check: {
@@ -9,14 +11,30 @@ const ImageIcons = {
   },
 };
 
-function ImageIcon({ name, size }) {
+function ImageIcon({ name, imageIconSize, imageIconColor }) {
+  const ImageIconSizeClassName = 'ImgIcon--' + imageIconSize;
+  const ImageIconColorClassName = `ImgIcon--` + imageIconColor;
   return (
     <div>
-      <svg height={size} viewBox='0 0 70 70' fill='none'>
-        <path d={ImageIcons[name].path} fill='#079C28' />
+      <svg
+        className={`${ImageIconSizeClassName} ${ImageIconColorClassName}`}
+        viewBox='0 0 70 70'
+        fill='none'
+      >
+        <path d={ImageIcons[name].path} />
       </svg>
     </div>
   );
 }
+
+ImageIcons.propTypes = {
+  imageIconColor: PropTypes.oneOf(['primary', 'secondary', 'danger', 'success']),
+  imageIconSize: PropTypes.oneOf(['small', 'medium', 'large']),
+};
+
+ImageIcons.defaultProps = {
+  imageIconColor: 'primary',
+  imageIconSize: 'medium',
+};
 
 export default ImageIcon;

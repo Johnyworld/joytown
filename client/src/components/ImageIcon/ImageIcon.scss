@@ -1,0 +1,20 @@
+@import '../../style/color.scss';
+
+.ImgIcon {
+  &--small {
+    height: 50px;
+  }
+  &--medium {
+    height: 70px;
+  }
+  &--large {
+    height: 100px;
+  }
+}
+.ImgIcon {
+  @each $key, $value in $colors {
+    &--#{$key} {
+      fill: var(--#{$key});
+    }
+  }
+}

@@ -17,7 +17,6 @@ function App() {
   };
   return (
     <div className='App'>
-      <ImageIcon name={'warn'} size={80} />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login />} />

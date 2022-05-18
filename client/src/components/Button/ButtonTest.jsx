@@ -35,15 +35,13 @@ const ButtonTest = ({ children, type, onClick, buttonStyle, buttonColor, buttonS
   );
 };
 
-
-//버튼 컴포넌트 어떤 형식의 스타일 항목이 있는지 
+//버튼 컴포넌트 어떤 형식의 스타일 항목이 있는지
 ButtonTest.propTypes = {
   buttonStyle: PropTypes.oneOf(['solid', 'outline']),
   buttonColor: PropTypes.oneOf(['primary', 'secondary', 'danger', 'success']),
   buttonSize: PropTypes.oneOf(['small', 'medium', 'large', 'fixed']),
   onClick: PropTypes.func,
 };
-
 
 //기본 컴포넌트 스타일이 뭔지
 ButtonTest.defaultProps = {
