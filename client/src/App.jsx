@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logOut } from './stores/userSlice';
 import './App.scss';
 import JoinCheck from './components/JoinCheck/JoinCheck';
+import ImageIcon from './components/ImageIcon/ImageIcon';
 
 function App() {
   const dispatch = useDispatch();
@@ -16,17 +17,10 @@ function App() {
   };
   return (
     <div className='App'>
-      {' '}
+      <ImageIcon name={'warn'} size={80} />
       <BrowserRouter>
-        {user && (
-          <p>
-            {user.name}({user.email}) 유저 로그인 됨.
-          </p>
-        )}
-        <Link to='/login'>로그인</Link>
-        <Link to='/join'>회원가입</Link>
         <Routes>
-          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Login />} />
           <Route path='/join' element={<Join />} />
           <Route path='/JoinCheck' element={<JoinCheck />} />
         </Routes>
