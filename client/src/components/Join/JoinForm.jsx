@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import Login from '../../Login';
 
 function JoinForm({ onSubmit }) {
-  let navigate = useNavigate();
   const [details, setDetails] = useState({
     name: '',
     email: '',
@@ -218,15 +217,7 @@ function JoinForm({ onSubmit }) {
         })}
       </div>
 
-      <ButtonTest
-        onClick={() => {
-          navigate('/JoinCheck');
-        }}
-        type='submit'
-        buttonColor='primary'
-        buttonSize='large'
-        buttonStyle='solid'
-      >
+      <ButtonTest type='submit' buttonColor='primary' buttonSize='large' buttonStyle='solid'>
         가입하기
       </ButtonTest>
 
