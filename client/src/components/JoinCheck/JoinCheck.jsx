@@ -23,7 +23,7 @@ export default function JoinCheck() {
       </div>
       <ButtonTest
         onClick={() => {
-          navigate('/Login');
+          navigate('/');
         }}
         buttonSize='fixed'
       >

@@ -223,7 +223,7 @@ function JoinForm({ onSubmit }) {
 
       <div className='join-not'>
         <p>이미 아이디가 있으신가요?</p>
-        <Link to='/login'>로그인</Link>
+        <Link to='/'>로그인</Link>
       </div>
     </form>
   );

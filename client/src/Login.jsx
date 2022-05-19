@@ -7,9 +7,10 @@ import './Login.scss';
 import useKakaoLogin from './hooks/useKakaoLogin';
 import { logOut } from './stores/userSlice';
 import LoginForm from './components/Login/LoginForm';
-import Logo from './components/Login/Logo';
+
 import LoginChannel from './components/Login/LoginChannel';
 import LoginSNS from './components/Login/LoginSNS';
+import Logo from './components/Logo/Logo';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -34,7 +35,6 @@ export default function Login() {
   return (
     <div className='Login'>
       <Logo />
-
       <LoginForm onSubmit={handler} />
 
       <LoginChannel />
